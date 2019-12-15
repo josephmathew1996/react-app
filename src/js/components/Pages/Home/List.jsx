@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import EditModal from './EditModal';
 import { Button } from 'reactstrap';
+import { Link } from "react-router-dom";
+
 
 
 
@@ -55,7 +57,6 @@ export default class ListData extends Component {
         });
     }
 
-  
 
     
     render() {
@@ -69,11 +70,13 @@ export default class ListData extends Component {
                         return(
                             <div className="card" key={index}>
                                 <div className="card-body">
-                                <h2 className="card-title">{post.id} : '{post.title}' written by {post.author}</h2>
+                                    <Link to={{pathname: `/post/${post.id}`}} >
+                                    <h2 className="card-title">{post.id} : '{post.title}' written by {post.author}</h2>
+                                    </Link>
                                  <Button color="danger" onClick={(e) => this.togglePostModal(e,post.id)}>Edit post</Button>
                                 {
                                     postModal && selectedPostId === post.id &&
-                                <EditModal className="modal-open" key="post" post={post} toggle={this.togglePostModal} isOpen={postModal} />
+                                <EditModal className="modal-open" key="post" post={post} toggle={this.togglePostModal} isOpen={postModal} editPost={this.props.ediPost}/>
                                 }
                                 <hr></hr>
 

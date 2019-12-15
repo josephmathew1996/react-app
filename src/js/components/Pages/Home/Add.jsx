@@ -6,21 +6,21 @@ export default class Add extends Component {
     // }
     constructor(props) {
         super(props);
-        console.log("constructor()*******")
+        // console.log("constructor()*******")
     }
     componentDidMount() {
-        console.log("componentDidMount()**********")
+        // console.log("componentDidMount()**********")
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log("shouldComponentUpdate()**********",nextProps, nextState)
+        // console.log("shouldComponentUpdate()**********",nextProps, nextState)
         return false
     }
     componentDidUpdate(prevProps, prevStat)
     {
-        console.log("shouldComponentUpdate()**********",prevProps, prevStat)
+        // console.log("shouldComponentUpdate()**********",prevProps, prevStat)
     }
     render() {
-        console.log("render()*******")
+        // console.log("render()*******")
         return (
             <div>
                <form onSubmit={(e) => this.props.handleSubmit(e)}>

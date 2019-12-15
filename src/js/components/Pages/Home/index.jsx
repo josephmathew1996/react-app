@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {getComments, getPosts, postPost, postComment } from '../../../api/data';
+import {getComments, getPosts, postPost, postComment, putPost } from '../../../api/data';
 import List from './List';
 import Add from './Add';
 
@@ -81,8 +81,25 @@ export default class Home extends Component {
         }
     }
 
-    handlePostEdit = (e,id) => {
-        console.log("e ,post id",e,id)
+    handlePostEdit = (data) => {
+        console.log("e ,edit post data",data);
+        this.ediPost(data);
+    }
+
+    ediPost = async (data) => {
+        try {
+            let res = await putPost(data);
+            console.log("post edit success",res)
+            let temp = [];
+            temp.push(res);
+            let finalPosts = this.state.posts.map(post => temp.find(p => p.id === post.id) || post )
+            console.log("finalPosts",finalPosts);   
+            this.setState({
+                posts : finalPosts,
+            })
+        }catch(error) {
+            console.log("post edit error",error);
+        }
     }
 
     
@@ -93,7 +110,7 @@ export default class Home extends Component {
             <div className="container">
                 <h1>FB-APP</h1>
                 <Add handleSubmit={this.postSubmit} handleChange={this.postChange} />
-               <List posts={posts} comments={comments} getAllData={this.getAllData} addComment={this.addComment} handleEdit={this.handlePostEdit} />
+               <List posts={posts} comments={comments} getAllData={this.getAllData} addComment={this.addComment} ediPost={this.handlePostEdit} />
             </div>
         )
     }

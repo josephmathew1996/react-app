@@ -5,7 +5,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 export default class EditModal extends Component {
     constructor(props){
         super(props);
-        console.log("propsin modal",this.props)
         this.state = {
             title : this.props.post.title,
             author : this.props.post.author,
@@ -14,7 +13,6 @@ export default class EditModal extends Component {
     }
 
     handleChange = (e,key) => {
-        console.log("id")
         this.setState({
             [key] : e.target.value
         });
@@ -24,8 +22,8 @@ export default class EditModal extends Component {
         data.id = this.props.post.id;
         data.title = this.state.title;
         data.author = this.state.author;
-        console.log("data for edit",data);
         this.props.editPost(data);
+        this.props.toggle();
     }
 
    
@@ -33,7 +31,6 @@ export default class EditModal extends Component {
     render() {
         const {className} = this.props;
         let {title,author} = this.state;
-        console.log("title,author",title,author)
         return (
             <div>
       <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={className}>
